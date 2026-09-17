@@ -30,3 +30,12 @@ jobs:
           format: 'table'
           exit-code: '0'
           severity: 'HIGH,CRITICAL'
+
+      - name: Save Docker Image to File
+        run: docker save vulnerable-test-image:latest -o vulnerable-image.tar
+
+      - name: Upload Image as Workflow Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vulnerable-docker-image
+          path: vulnerable-image.tar
